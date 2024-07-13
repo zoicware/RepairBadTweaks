@@ -4,22 +4,6 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
     Exit	
 }
 
-# svc split threshold 
-# https://learn.microsoft.com/en-us/windows/application-management/svchost-service-refactoring
-# bcdedit
-# timer res
-# hpet? (device manager)
-# win32priority
-# tcp tweaks
-# network adapter tweaks?
-# enable prefetch (super fetch service)
-# windows error reporting (manual for mini dump file)
-# enable sysmain service 
-# ordinary dpcs
-# mouse and keyboard data queue size
-# spectre meltdown
-# placebo tweaks https://www.youtube.com/@Savitarax
-
 #global vars
 $Global:currentControlSet = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet'
 $Global:controlSet001 = 'HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001'
