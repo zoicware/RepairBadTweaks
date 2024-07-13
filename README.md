@@ -1,5 +1,8 @@
 ## Repair Bad Tweaks
 
+<img width="239" alt="image" src="https://github.com/user-attachments/assets/5226dccc-6d13-4892-bbfc-1a9f87bf269b">
+
+
 ### Why?
 As tweaking windows becomes more popular self proclaimed experts incorrectly interpret microsoft documentation and other sources. This causes less tech savvy people to blindly trust these "tweakers" and negatively effect the performance of their operating system. This script aims to revert these tweaks to their default values. 
 
