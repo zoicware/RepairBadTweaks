@@ -24,7 +24,8 @@ function checkTweaks {
         'Ordinary DPCs',
         'Spectre Meltdown Mitigations',
         'HPET',
-        'Mouse Keyboard Queue Size'
+        'Mouse Keyboard Queue Size',
+        'Csrss Priority'
     )
     #add to hashtable
     foreach ($tweak in $tweaks) {
@@ -141,6 +142,11 @@ function checkTweaks {
         }
     }
 
+    #check csrss priority
+    if (Test-Path -Path 'registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions' -ErrorAction SilentlyContinue) {
+        $tweaksTable['Csrss Priority'] = $true
+    }
+
     return $tweaksTable
 }
 
@@ -226,6 +232,10 @@ function repairTweaks($tweakNames) {
         if ($tweak -eq 'Windows Error Reporting') {
             Set-Service -Name WerSvc -StartupType Manual -Force 
             Remove-ItemProperty -Path 'registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting' -Name 'Disabled' -Force -ErrorAction SilentlyContinue
+        }
+        #repair csrss priority
+        if ($tweak -eq 'Csrss Priority') {
+            Remove-Item -Path 'registry::HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions' -Recurse -Force
         }
 
     }
