@@ -116,10 +116,32 @@ function checkTweaks {
     }
 
     #check mouse and keyboard queue size
-    $keyboardCurrent = Get-ItemPropertyValue -Path "registry::$currentControlSet\Services\kbdclass\Parameters" -Name 'KeyboardDataQueueSize' -ErrorAction SilentlyContinue
-    $mouseCurrent = Get-ItemPropertyValue -Path "registry::$currentControlSet\Services\mouclass\Parameters" -Name 'MouseDataQueueSize' -ErrorAction SilentlyContinue
-    $keyboardControl = Get-ItemPropertyValue -Path "registry::$controlSet001\Services\kbdclass\Parameters" -Name 'KeyboardDataQueueSize' -ErrorAction SilentlyContinue
-    $mouseControl = Get-ItemPropertyValue -Path "registry::$controlSet001\Services\mouclass\Parameters" -Name 'MouseDataQueueSize' -ErrorAction SilentlyContinue
+    #use try and catch when value doesnt exist
+    try {
+        $keyboardCurrent = Get-ItemPropertyValue -Path "registry::$currentControlSet\Services\kbdclass\Parameters" -Name 'KeyboardDataQueueSize' -ErrorAction SilentlyContinue
+    }
+    catch {
+        #hide error
+    }
+    try {
+        $mouseCurrent = Get-ItemPropertyValue -Path "registry::$currentControlSet\Services\mouclass\Parameters" -Name 'MouseDataQueueSize' -ErrorAction SilentlyContinue
+    }
+    catch {
+        #hide error
+    }
+    try {
+        $keyboardControl = Get-ItemPropertyValue -Path "registry::$controlSet001\Services\kbdclass\Parameters" -Name 'KeyboardDataQueueSize' -ErrorAction SilentlyContinue
+    }
+    catch {
+        #hide error
+    }
+    try {
+        $mouseControl = Get-ItemPropertyValue -Path "registry::$controlSet001\Services\mouclass\Parameters" -Name 'MouseDataQueueSize' -ErrorAction SilentlyContinue
+    }
+    catch {
+        #hide error
+    }
+    
     #if value is null that is fine too (default value 100)
     if ($keyboardCurrent) {
         if ($keyboardCurrent -ne 100) {
