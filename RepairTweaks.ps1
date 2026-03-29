@@ -300,7 +300,7 @@ function repairTweaks($tweakNames) {
         }
         #repair windows error reporting
         if ($tweak -eq 'Windows Error Reporting') {
-            Set-Service -Name WerSvc -StartupType Manual -Force 
+            Set-Service -Name WerSvc -StartupType Manual 
             Remove-ItemProperty -Path 'registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting' -Name 'Disabled' -Force -ErrorAction SilentlyContinue
         }
         #repair csrss priority
